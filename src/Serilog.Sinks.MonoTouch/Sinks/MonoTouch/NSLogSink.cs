@@ -1,11 +1,11 @@
 // Copyright 2015 Serilog Contributors
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,22 +20,22 @@ using Serilog.Formatting;
 
 namespace Serilog.Sinks.MonoTouch
 {
-	class NSLogSink : ILogEventSink
-	{
-		readonly ITextFormatter _textFormatter;
+    internal class NSLogSink : ILogEventSink
+    {
+        private readonly ITextFormatter _textFormatter;
 
-		public NSLogSink(ITextFormatter textFormatter)
-		{
-			if (textFormatter == null) throw new ArgumentNullException("textFormatter");
-			_textFormatter = textFormatter;
-		}
+        public NSLogSink(ITextFormatter textFormatter)
+        {
+            if (textFormatter == null) throw new ArgumentNullException(nameof(textFormatter));
+            _textFormatter = textFormatter;
+        }
 
-		public void Emit(LogEvent logEvent)
-		{
-			if (logEvent == null) throw new ArgumentNullException("logEvent");
-			var renderSpace = new StringWriter();
-			_textFormatter.Format(logEvent, renderSpace);
-			Console.WriteLine (renderSpace.ToString ());
-		}
-	}
+        public void Emit(LogEvent logEvent)
+        {
+            if (logEvent == null) throw new ArgumentNullException(nameof(logEvent));
+            var renderSpace = new StringWriter();
+            _textFormatter.Format(logEvent, renderSpace);
+            Console.WriteLine(renderSpace.ToString());
+        }
+    }
 }
